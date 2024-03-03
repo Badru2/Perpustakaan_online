@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Buku;
 use App\Models\KategoriBuku;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BukuController extends Controller
 {
@@ -65,5 +66,53 @@ class BukuController extends Controller
         $buku = Buku::find($id);
 
         return view('pages.admin.showBuku', compact('buku'));
+    }
+
+    public function edit($id)
+    {
+        $buku = Buku::find($id);
+        $kategoris = KategoriBuku::get();
+
+        return view('pages.admin.editBuku', compact('buku', 'kategoris'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'judul' => 'required',
+            'cover' => 'mimes:png,jpg,jpeg,webp',
+            'penulis' => 'required',
+            'penerbit' => 'required',
+            'tahunTerbit' => 'required',
+            'kategori_bukus_id' => 'required',
+        ]);
+
+        $buku = Buku::find($id);
+
+        if ($request->hasFile('cover')) {
+            $cover = $request->file('cover');
+            $cover->storeAs('public/cover', $cover->hashName());
+
+            Storage::delete('public/cover/ ' . $buku->cover);
+
+            $buku->update([
+                'judul' => $request->judul,
+                'cover' => $cover->hashName(),
+                'penulis' => $request->penulis,
+                'penerbit' => $request->penerbit,
+                'tahunTerbit' => $request->tahunTerbit,
+                'kategori_bukus_id' => $request->kategori_bukus_id,
+            ]);
+        } else {
+            $buku->update([
+                'judul' => $request->judul,
+                'penulis' => $request->penulis,
+                'penerbit' => $request->penerbit,
+                'tahunTerbit' => $request->tahunTerbit,
+                'kategori_bukus_id' => $request->kategori_bukus_id,
+            ]);
+        }
+
+        return redirect()->route('dashboard');
     }
 }

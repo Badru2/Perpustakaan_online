@@ -24,6 +24,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/tambahBuku', [BukuController::class, 'create'])->name('create.buku');
     Route::post('/storeBuku', [BukuController::class, 'store'])->name('store.buku');
     Route::get('show/{id}', [BukuController::class, 'show'])->name('show.buku');
+    Route::get('edit/{id}', [BukuController::class, 'edit'])->name('edit.buku');
+    Route::put('update/{id}', [BukuController::class, 'update'])->name('update.buku');
     Route::post('/tambahKategori', [BukuController::class, 'categoryStore'])->name('store.kategori');
 
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
