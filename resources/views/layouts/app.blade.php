@@ -30,10 +30,37 @@
         @endif
 
         <!-- Page Content -->
-        <main class="mx-auto max-w-7xl">
+        <main class="py-12 mx-auto max-w-7xl">
             {{ $slot }}
         </main>
     </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+    <script>
+        document.getElementById('selectImage').onchange = function(evt) {
+            const imagePreview = document.getElementById('imagePreview');
+            const imagePreview1 = document.getElementById('imagePreview1');
+
+            imagePreview.style.display = 'none';
+
+            const [file] = evt.target.files;
+
+            if (file) {
+                const fileURL = URL.createObjectURL(file);
+
+                if (file.type.startsWith('image/')) {
+                    // Show image preview
+                    imagePreview.src = fileURL;
+                    imagePreview.style.display = 'block';
+                    imagePreview1.style.display = 'none';
+                } else {
+                    // Handle other file types as needed
+                    console.error('Unsupported file type');
+                }
+            }
+        };
+    </script>
 </body>
 
 </html>

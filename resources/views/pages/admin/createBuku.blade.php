@@ -46,31 +46,6 @@
         </form>
     </div>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
-    <script>
-        document.getElementById('selectImage').onchange = function(evt) {
-            const imagePreview = document.getElementById('imagePreview');
-
-            imagePreview.style.display = 'none';
-
-            const [file] = evt.target.files;
-
-            if (file) {
-                const fileURL = URL.createObjectURL(file);
-
-                if (file.type.startsWith('image/')) {
-                    // Show image preview
-                    imagePreview.src = fileURL;
-                    imagePreview.style.display = 'block';
-                } else {
-                    // Handle other file types as needed
-                    console.error('Unsupported file type');
-                }
-            }
-        };
-    </script>
-
     <!-- Dropdown menu -->
     <div id="dropdownDotsHorizontal"
         class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
@@ -85,7 +60,7 @@
             </li>
             <li>
                 <a href="#"
-                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                    class="block px-4 py-2 hover:bg-gray-x100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
             </li>
         </ul>
         <div class="py-2">

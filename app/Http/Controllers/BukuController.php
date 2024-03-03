@@ -64,8 +64,10 @@ class BukuController extends Controller
     public function show($id)
     {
         $buku = Buku::find($id);
+        $bukusPenulis = Buku::where('penulis', $buku->penulis)->where('id', '!=', $buku->id)->get();
+        $bukusPenerbit = Buku::where('penerbit', $buku->penerbit)->where('id', '!=', $buku->id)->get();
 
-        return view('pages.admin.showBuku', compact('buku'));
+        return view('pages.admin.showBuku', compact('buku', 'bukusPenulis', 'bukusPenerbit'));
     }
 
     public function edit($id)
