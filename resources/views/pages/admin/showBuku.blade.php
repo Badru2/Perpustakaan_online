@@ -13,11 +13,15 @@
                             <p>Penerbit : <b>{{ $buku->penerbit }}</b></p>
                             <p>Tahun Terbit : <b>{{ $buku->tahunTerbit }}</b></p>
                             <p>Genre : <b>{{ $buku->kategoriBukus->nama }}</b></p>
+                            <a class="m-2 text-xl cursor-pointer " onclick="like({{ $buku->id }}, this)">
+                                <iconify-icon
+                                    icon="{{ $buku->is_liked() ? 'material-symbols-light:favorite' : 'material-symbols:favorite-outline' }}"></iconify-icon>
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="p-5">
-                    <h1 class="font-bold text-2xl">Sinopsis :</h1>
+                    <h1 class="text-2xl font-bold">Sinopsis :</h1>
                     <p>{{ $buku->sinopsis }}</p>
                 </div>
             </div>

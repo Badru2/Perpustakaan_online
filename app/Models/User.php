@@ -42,4 +42,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function bukus()
+    {
+        return $this->belongsTo(Buku::class);
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany(Buku::class, 'likes', 'user_id', 'buku_id')->withPivot('id')
+            ->orderBy('likes.id', 'desc');
+    }
 }

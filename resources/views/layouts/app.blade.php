@@ -14,6 +14,7 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js', 'node_modules/flowbite/dist/flowbite.min.js'])
+    <script src="https://code.iconify.design/iconify-icon/2.0.0/iconify-icon.min.js"></script>
 </head>
 
 <body class="font-sans antialiased">
@@ -30,7 +31,7 @@
         @endif
 
         <!-- Page Content -->
-        <main class="py-12 mx-auto max-w-7xl">
+        <main class="py-24 mx-auto max-w-7xl">
             {{ $slot }}
         </main>
     </div>
@@ -38,6 +39,20 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
     <script>
+        function like(id, el) {
+            fetch('/like/' + id)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status == 'LIKE') {
+                        el.innerHTML =
+                            '<iconify-icon icon="material-symbols-light:favorite"></iconify-icon>';
+                    } else {
+                        el.innerHTML =
+                            '<div class="text-danger"><iconify-icon icon="material-symbols:favorite-outline"></iconify-icon></div>';
+                    }
+                });
+        }
+
         document.getElementById('selectImage').onchange = function(evt) {
             const imagePreview = document.getElementById('imagePreview');
             const imagePreview1 = document.getElementById('imagePreview1');

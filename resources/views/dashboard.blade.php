@@ -31,8 +31,10 @@
                                         class="object-cover w-full h-64">
                                 </a>
                                 <div class="py-2 font-bold flex flex-col justify-between">
-                                    <a href="{{ route('show.buku', $buku->id) }}">{{ $buku->judul }}</a>
-                                    <hr>
+                                    <div>
+                                        <a href="{{ route('show.buku', $buku->id) }}">{{ $buku->judul }}</a>
+                                    </div>
+                                    <hr class="py-1">
                                     <div>
                                         <a href="" class="text-blue-500">{{ $buku->kategoriBukus->nama }}</a>
                                     </div>

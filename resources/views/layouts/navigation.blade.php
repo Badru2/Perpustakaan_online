@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('create.buku')" :active="request()->routeIs('create.buku')">
                         {{ __('Buku') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('liked.buku')" :active="request()->routeIs('liked.buku')">
+                        {{ __('Liked') }}
+                    </x-nav-link>
                 </div>
             </div>
 

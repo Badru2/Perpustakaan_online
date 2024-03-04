@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Buku;
 use App\Models\KategoriBuku;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class BukuController extends Controller
@@ -27,6 +28,30 @@ class BukuController extends Controller
         ]);
 
         return redirect()->back();
+    }
+
+    public function like($id)
+    {
+        $buku = Buku::with('user')->findOrFail($id);
+        $attr = ['user_id' => Auth::user()->id];
+
+        if ($buku->likes()->where($attr)->exists()) {
+            $buku->likes()->where($attr)->delete();
+            $msg = ['status' => 'UNLIKE'];
+        } else {
+            $buku->likes()->create($attr);
+            $msg = ['status' => 'LIKE'];
+        }
+
+        return response()->json($msg);
+    }
+
+    public function likedBuku(Request $request)
+    {
+        $user = $request->user();
+        $bukus = $user->likes()->latest()->get();
+
+        return view('pages.user.likedBuku', compact('bukus'));
     }
 
     public function store(Request $request)

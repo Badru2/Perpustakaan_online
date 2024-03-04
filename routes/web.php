@@ -18,6 +18,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/tambahKategori', [BukuController::class, 'categoryStore'])->name('store.kategori');
 
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/like/{id}', [BukuController::class, 'like'])->name('like.buku');
+
+    Route::get('likedBuku', [BukuController::class, 'likedBuku'])->name('liked.buku');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
