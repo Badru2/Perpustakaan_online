@@ -19,30 +19,35 @@
             </button>
         </div>
 
-        <form method="POST" action="{{ route('store.buku') }}" class="flex mt-3 space-x-3" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('store.buku') }}" class="mt-3 space-y-3" enctype="multipart/form-data">
             @csrf
-            <div class="w-1/2">
-                <input type="file" class="w-full" name="cover" id="selectImage">
+            <div class="flex">
+                <div class="w-1/2">
+                    <input type="file" class="w-full" name="cover" id="selectImage">
 
-                <div class="mt-2">
-                    <img id="imagePreview" src="#" alt="your image" class="mx-auto mt-3" style="display:none;" />
+                    <div class="mt-2">
+                        <img id="imagePreview" src="#" alt="your image" class="mx-auto mt-3"
+                            style="display:none;" />
+                    </div>
+
                 </div>
 
+                <div class="w-1/2 space-y-3">
+                    <input type="text" class="w-full" name="judul" placeholder="Judul">
+                    <input type="text" class="w-full" name="penulis" placeholder="Penulis">
+                    <input type="text" class="w-full" name="penerbit" placeholder="Penerbit">
+                    <input type="date" class="w-full" name="tahunTerbit">
+                    <select class="w-full" name="kategori_bukus_id" id="">
+                        <option>Pilih Kategori</option>
+                        @foreach ($kategoris as $kategori)
+                            <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
+                        @endforeach
+                    </select>
+                    <input type="number" name="stok" id="" class="w-full" placeholder="Jumlah Stok">
+                </div>
             </div>
-
-            <div class="w-1/2 space-y-3">
-                <input type="text" class="w-full" name="judul" placeholder="Judul">
-                <input type="text" class="w-full" name="penulis" placeholder="Penulis">
-                <input type="text" class="w-full" name="penerbit" placeholder="Penerbit">
-                <input type="date" class="w-full" name="tahunTerbit">
-                <select class="w-full" name="kategori_bukus_id" id="">
-                    <option>Pilih Kategori</option>
-                    @foreach ($kategoris as $kategori)
-                        <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
-                    @endforeach
-                </select>
-                <button type="submit">Create</button>
-            </div>
+            <textarea name="sinopsis" id="" cols="30" rows="10" class="w-full rounded-md" placeholder="Sinopsis"></textarea>
+            <button type="submit">Create</button>
         </form>
     </div>
 

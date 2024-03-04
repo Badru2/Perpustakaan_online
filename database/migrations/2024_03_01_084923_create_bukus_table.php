@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('penerbit')->nullable();
             $table->string('tahunTerbit')->nullable();
             $table->foreignId('kategori_bukus_id')->nullable()->constrained('kategori_bukus')->cascadeOnDelete();
+            $table->integer('stok')->nullable();
+            $table->text('sinopsis')->nullable();
             $table->timestamps();
         });
     }

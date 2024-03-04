@@ -11,7 +11,7 @@
                             <a href="{{ route('show.buku', $buku->id) }}">
                                 <img src="{{ asset('/storage/cover/' . $buku->cover) }}" alt=""
                                     class="object-cover w-full h-40">
-                                <p class="py-2">{{ $buku->judul }}</p>
+                                <p class="py-2 font-bold">{{ $buku->judul }}</p>
                             </a>
                         </div>
                     @endforeach
@@ -23,15 +23,21 @@
                 <hr>
                 <div class="grid w-full grid-cols-4 gap-3 overflow-hidden shadow-sm">
                     @foreach ($bukus as $buku)
-                        <div
-                            class="p-3 transition duration-500 delay-75 bg-white shadow-md me-2 hover:bg-slate-500 hover:text-white">
-                            <a href="{{ route('show.buku', $buku->id) }}">
-                                <img src="{{ asset('/storage/cover/' . $buku->cover) }}" alt=""
-                                    class="object-cover w-full h-64">
-                            </a>
-                            <p class="py-2 font-bold">
-                                <a href="{{ route('show.buku', $buku->id) }}">{{ $buku->judul }}</a>
-                            </p>
+                        <div>
+                            <div
+                                class="p-3 transition duration-500 delay-75 bg-white shadow-md me-2 hover:bg-slate-500 hover:text-white">
+                                <a href="{{ route('show.buku', $buku->id) }}">
+                                    <img src="{{ asset('/storage/cover/' . $buku->cover) }}" alt=""
+                                        class="object-cover w-full h-64">
+                                </a>
+                                <div class="py-2 font-bold flex flex-col justify-between">
+                                    <a href="{{ route('show.buku', $buku->id) }}">{{ $buku->judul }}</a>
+                                    <hr>
+                                    <div>
+                                        <a href="" class="text-blue-500">{{ $buku->kategoriBukus->nama }}</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     @endforeach
                 </div>

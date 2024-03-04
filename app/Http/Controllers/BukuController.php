@@ -38,6 +38,8 @@ class BukuController extends Controller
             'penerbit' => 'nullable',
             'tahunTerbit' => 'nullable',
             'kategori_bukus_id' => 'required',
+            'stok' => 'required',
+            'sinopsis' => 'required',
         ]);
 
         $cover = $request->file('cover');
@@ -55,7 +57,9 @@ class BukuController extends Controller
             'penulis' => $request->penulis,
             'penerbit' => $request->penerbit,
             'tahunTerbit' => $request->tahunTerbit,
-            'kategori_bukus_id' => $request->kategori_bukus_id
+            'kategori_bukus_id' => $request->kategori_bukus_id,
+            'stok' => $request->stok,
+            'sinopsis' => $request->sinopsis,
         ]);
 
         return redirect()->route('dashboard');
@@ -66,8 +70,9 @@ class BukuController extends Controller
         $buku = Buku::find($id);
         $bukusPenulis = Buku::where('penulis', $buku->penulis)->where('id', '!=', $buku->id)->get();
         $bukusPenerbit = Buku::where('penerbit', $buku->penerbit)->where('id', '!=', $buku->id)->get();
+        $bukusKategori = Buku::where('kategori_bukus_id', $buku->kategori_bukus_id)->where('id', '!=', $buku->id)->get();
 
-        return view('pages.admin.showBuku', compact('buku', 'bukusPenulis', 'bukusPenerbit'));
+        return view('pages.admin.showBuku', compact('buku', 'bukusPenulis', 'bukusPenerbit', 'bukusKategori'));
     }
 
     public function edit($id)
@@ -87,6 +92,8 @@ class BukuController extends Controller
             'penerbit' => 'required',
             'tahunTerbit' => 'required',
             'kategori_bukus_id' => 'required',
+            'stok' => 'required',
+            'sinopsis' => 'required',
         ]);
 
         $buku = Buku::find($id);
@@ -104,6 +111,8 @@ class BukuController extends Controller
                 'penerbit' => $request->penerbit,
                 'tahunTerbit' => $request->tahunTerbit,
                 'kategori_bukus_id' => $request->kategori_bukus_id,
+                'stok' => $request->stok,
+                'sinopsis' => $request->sinopsis,
             ]);
         } else {
             $buku->update([
@@ -112,6 +121,8 @@ class BukuController extends Controller
                 'penerbit' => $request->penerbit,
                 'tahunTerbit' => $request->tahunTerbit,
                 'kategori_bukus_id' => $request->kategori_bukus_id,
+                'stok' => $request->stok,
+                'sinopsis' => $request->sinopsis,
             ]);
         }
 
